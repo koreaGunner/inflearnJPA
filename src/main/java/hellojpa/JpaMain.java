@@ -22,10 +22,15 @@ public class JpaMain {
         try {
             //code
             //insert
+            //비영속 상태
 //            Member member = new Member();
 //            member.setId(2L);
 //            member.setName("HelloB");
+            //영속 상태(이 때, db에 저장되는 것이 아님)
+            //BEFORE AFTER 사이에 쿼리가 실행되지 않음을 확인할 수 있다
+//            System.out.println("=== BEFORE ===");
 //            em.persist(member);
+//            System.out.println("=== AFTER ===");
 
             //delete
             //em.find 후에
