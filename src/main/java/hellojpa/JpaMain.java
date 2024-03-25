@@ -24,13 +24,19 @@ public class JpaMain {
             //insert
             //비영속 상태
 //            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
+//            member.setId(101L);
+//            member.setName("HelloJPA");
             //영속 상태(이 때, db에 저장되는 것이 아님)
             //BEFORE AFTER 사이에 쿼리가 실행되지 않음을 확인할 수 있다
 //            System.out.println("=== BEFORE ===");
 //            em.persist(member);
 //            System.out.println("=== AFTER ===");
+
+            //영속 : 쿼리가 한번만 나간다
+            Member findMember1 = em.find(Member.class, 101L);
+            Member findMember2 = em.find(Member.class, 101L);
+
+            System.out.println(findMember1 == findMember2);
 
             //delete
             //em.find 후에
@@ -49,15 +55,15 @@ public class JpaMain {
             //select(전체회원) -> 단일회원 조회같은건 em.find로 가능
             //JPA는 테이블을 대상으로 쿼리를 짜지않는다
             //객체를 대상으로 쿼리를 짠다(객체지향쿼리)
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
                     //페이지네이션
-//                    .setFirstResult(1)
-//                    .setMaxResults(8)
-                    .getResultList();
+////                    .setFirstResult(1)
+////                    .setMaxResults(8)
+//                    .getResultList();
 
-            for (Member member : result) {
-                System.out.println("member.getName() = " + member.getName());
-            }
+//            for (Member member : result) {
+//                System.out.println("member.getName() = " + member.getName());
+//            }
 
             tx.commit();
         } catch (Exception e) {
