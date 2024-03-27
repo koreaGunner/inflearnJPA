@@ -22,7 +22,7 @@ public class JpaMain3_4 {
 
         try{
             //영속
-            Member member = em.find(Member.class, 150L);
+            Member2 member = em.find(Member2.class, 150L);
             member.setName("AAAA"); //em.persist(member) 를 쓰면 안됨
 
             //data 변경 쿼리가 실행되지않음
@@ -33,7 +33,7 @@ public class JpaMain3_4 {
             em.clear();
 
             //영속성컨텍스트가 관리됐다면 쿼리를 실행하지 않으나, em.clear로 다 날려버렸기 때문에 쿼리를 다시 날림
-            Member member2 = em.find(Member.class, 150L);
+            Member2 member2 = em.find(Member2.class, 150L);
 
 
             System.out.println("====================================");
