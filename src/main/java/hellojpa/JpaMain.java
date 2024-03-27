@@ -2,8 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -33,10 +31,10 @@ public class JpaMain {
 //            System.out.println("=== AFTER ===");
 
             //영속 : 쿼리가 한번만 나간다
-            Member findMember1 = em.find(Member.class, 101L);
-            Member findMember2 = em.find(Member.class, 101L);
+            Member2 findMember12 = em.find(Member2.class, 101L);
+            Member2 findMember22 = em.find(Member2.class, 101L);
 
-            System.out.println(findMember1 == findMember2);
+            System.out.println(findMember12 == findMember22);
 
             //delete
             //em.find 후에

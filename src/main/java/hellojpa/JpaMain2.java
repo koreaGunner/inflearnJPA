@@ -26,8 +26,8 @@ public class JpaMain2 {
 //            Member member1 = new Member(150L, "A");
 //            Member member2 = new Member(160L, "B");
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ"); //em.persist(member) 를 쓰면 안됨
+            Member2 member2 = em.find(Member2.class, 150L);
+            member2.setName("ZZZZZ"); //em.persist(member) 를 쓰면 안됨
 
 //            em.persist(member1);
 //            em.persist(member2);

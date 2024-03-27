@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-public class JpaMain3 {
+public class JpaMainMember {
     public static void main(String[] args) {
 
         //엔티티 매니저 팩토리는 하나만 생성해서 애플리케이션 전체에서 공유
@@ -19,14 +19,14 @@ public class JpaMain3 {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        try{
-            Member2 member2 = new Member2(200L, "member200");
-            em.persist(member2);
+        try {
+            Member member = new Member();
+            member.setId(2L);
+            member.setUsername("B");
+            member.setRoleType(RoleType.ADMIN);
 
-            //직접 호출(이 때 쿼리가 실행됨)
-            em.flush();
+            em.persist(member);
 
-            System.out.println("=============================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -35,6 +35,5 @@ public class JpaMain3 {
         }
 
         emf.close();
-
     }
 }
