@@ -19,8 +19,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments"  value="true"/>
             <property name="hibernate.jdbc.batch_size"  value="10"/> <!-- 지연저장소에 쌓을 수 있는 쿼리 개수 -->
-            <property name="hibernate.hbm2ddl.auto" value="create" />
-            <!-- 기존의 테이블을 drop 시키고 create함 -->
+            <!--<property name="hibernate.hbm2ddl.auto" value="create" />--> <!-- 기존의 테이블을 drop 시키고 create함 -->
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />--> <!-- create와 같으나 종료시점에 테이블 drop -->
             <!--<property name="hibernate.hbm2ddl.auto" value="update" />--> <!-- 변경분만 반영(컬럼 추가는 가능하나 삭제는 불가능) -->
             <!--<property name="hibernate.hbm2ddl.auto" value="validate" />--> <!-- 엔티티와 테이블이 정상 매핑되었는지만 확인(안됐을 시 오류) -->
