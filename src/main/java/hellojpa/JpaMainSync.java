@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 public class JpaMainSync {
     public static void main(String[] args) {
 
@@ -34,8 +36,12 @@ public class JpaMainSync {
             em.clear();
 
             MemberSync findMember = em.find(MemberSync.class, member.getId());
-            TeamSync findTeam = findMember.getTeam();
-            System.out.println("findTeam.getName() = " + findTeam.getName());
+            List<MemberSync> members = findMember.getTeam().getMembers();
+
+            for (MemberSync memberSync : members) {
+                System.out.println("memberSync.getUsername() = " + memberSync.getUsername());
+            }
+
 
             tx.commit();
         } catch (Exception e) {

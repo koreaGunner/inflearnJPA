@@ -1,9 +1,9 @@
 package hellojpa;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class TeamSync {
@@ -12,6 +12,9 @@ public class TeamSync {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "team")
+    private List<MemberSync> members = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -27,5 +30,13 @@ public class TeamSync {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<MemberSync> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<MemberSync> members) {
+        this.members = members;
     }
 }
