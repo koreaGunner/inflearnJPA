@@ -22,8 +22,10 @@ public class MemberSync {
         return team;
     }
 
-    public void setTeam(TeamSync team) {
+    public void changeTeam(TeamSync team) {
         this.team = team;
+        //연관관계 편의 메서드
+        team.getMembers().add(this);
     }
 
     public Long getId() {
