@@ -22,29 +22,40 @@ public class JpaMainSync {
         tx.begin();
 
         try {
-            TeamSync team = new TeamSync();
-            team.setName("TeamA");
-            em.persist(team);
-
-            MemberSync member = new MemberSync();
-            member.setUsername("member1");
-            member.changeTeam(team);
-            em.persist(member);
+//            TeamSync team = new TeamSync();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            MemberSync member = new MemberSync();
+//            member.setUsername("member1");
+//            member.changeTeam(team);
+//            em.persist(member);
             
             //양방향일 때, 양쪽에 다 값을 넣어주는게 제일 좋다
             //그런데 사람은 실수로 안넣을 수 있기때문에.. setTeam함수(chageTeam으로 변경)에 이 로직을 추가해주는게 제일 좋다
             //team.getMembers().add(member); --> setTeam(chageTeam으로 변경)함수에 추가
 
             //영속성 컨텍스트를 날려서 실제 insert쿼리를 먼저 보고싶다면(영속성컨텍스트 클리어)
-            em.flush();
-            em.clear();
+//            em.flush();
+//            em.clear();
+//
+//            TeamSync findTeam = em.find(TeamSync.class, team.getId());
+//            List<MemberSync> members = findTeam.getMembers();
+//
+//            for (MemberSync memberSync : members) {
+//                System.out.println("memberSync.getUsername() = " + memberSync.getUsername());
+//            }
 
-            TeamSync findTeam = em.find(TeamSync.class, team.getId());
-            List<MemberSync> members = findTeam.getMembers();
+            MemberSync member = new MemberSync();
+            member.setUsername("member1");
 
-            for (MemberSync memberSync : members) {
-                System.out.println("memberSync.getUsername() = " + memberSync.getUsername());
-            }
+            em.persist(member);
+
+            TeamSync team = new TeamSync();
+            team.setName("teamA");
+            team.getMembers().add(member);
+
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {
