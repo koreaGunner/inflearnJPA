@@ -2,6 +2,9 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class MemberSync {
 
@@ -21,6 +24,13 @@ public class MemberSync {
 //    @ManyToOne
 //    @JoinColumn(name = "TEAM_ID")
 //    private TeamSync team;
+
+//    @ManyToMany //다대다 : 실무에서 쓰이지않는다
+//    @JoinTable(name = "MEMBER_PRODUCT")
+//    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
         return id;
