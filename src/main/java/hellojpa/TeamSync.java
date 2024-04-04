@@ -13,8 +13,18 @@ public class TeamSync {
 
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
     private List<MemberSync> members = new ArrayList<>();
+
+
+    public List<MemberSync> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<MemberSync> members) {
+        this.members = members;
+    }
 
     public Long getId() {
         return id;
@@ -32,11 +42,4 @@ public class TeamSync {
         this.name = name;
     }
 
-    public List<MemberSync> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<MemberSync> members) {
-        this.members = members;
-    }
 }
