@@ -12,7 +12,7 @@ public class MemberProduct {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
-    private Member member;
+    private MemberSync member;
 
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")

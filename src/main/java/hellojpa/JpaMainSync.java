@@ -46,16 +46,30 @@ public class JpaMainSync {
 //                System.out.println("memberSync.getUsername() = " + memberSync.getUsername());
 //            }
 
-            MemberSync member = new MemberSync();
-            member.setUsername("member1");
+//            MemberSync member = new MemberSync();
+//            member.setUsername("member1");
+//
+//            em.persist(member);
+//
+//            TeamSync team = new TeamSync();
+//            team.setName("teamA");
+//            team.getMembers().add(member);
+//
+//            em.persist(team);
 
-            em.persist(member);
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbbb");
+            movie.setName("바람과함께사라지다");
+            movie.setPrice(10000);
 
-            TeamSync team = new TeamSync();
-            team.setName("teamA");
-            team.getMembers().add(member);
+            em.persist(movie);
 
-            em.persist(team);
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
 
             tx.commit();
         } catch (Exception e) {
