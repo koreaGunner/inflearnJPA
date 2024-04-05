@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class TeamSync {
+public class TeamSync extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "TEAM_ID")
     private Long id;
