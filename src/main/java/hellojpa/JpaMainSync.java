@@ -72,15 +72,35 @@ public class JpaMainSync {
 //            Movie findMovie = em.find(Movie.class, movie.getId());
 //            System.out.println("findMovie = " + findMovie);
 
+//            MemberSync member = new MemberSync();
+//            member.setUsername("user1");
+//            member.setCreatedBy("kim");
+//            member.setCreatedDate(LocalDateTime.now());
+//
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+
             MemberSync member = new MemberSync();
-            member.setUsername("user1");
-            member.setCreatedBy("kim");
-            member.setCreatedDate(LocalDateTime.now());
+            member.setUsername("hello");
 
             em.persist(member);
 
             em.flush();
             em.clear();
+
+//            MemberSync findMember = em.find(MemberSync.class, member.getId());
+            MemberSync findMember = em.getReference(MemberSync.class, member.getId()); //프록시객체 -> 쿼리가 나가지않는다
+            System.out.println("findMember = " + findMember.getClass()); //프록시클래스임을 확인(쿼리 나가지않는다.)
+            System.out.println("findMember.getId() = " + findMember.getId()); //위의 코드에서 파라미터로 썼기때문에 쿼리 나가지않는다
+            System.out.println("findMember.getUsername() = " + findMember.getUsername()); //실제 findMember를 쓸 때 쿼리가 나간다.
+
+
+//            printMember(findMember);
+
+//            printMemberAndTeam(member);
+
 
             tx.commit();
         } catch (Exception e) {
@@ -90,5 +110,19 @@ public class JpaMainSync {
         }
 
         emf.close();
+    }
+
+    private static void printMember(MemberSync member) {
+        System.out.println("member.getUsername() = " + member.getUsername());
+
+    }
+
+    private static void printMemberAndTeam(MemberSync member) {
+        String username = member.getUsername();
+        System.out.println("username = " + username);
+
+        TeamSync team = member.getTeam();
+        System.out.println("team.getName() = " + team.getName());
+
     }
 }
