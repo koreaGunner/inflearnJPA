@@ -22,8 +22,8 @@ public class MemberSync extends BaseEntity {
 
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TEAM_ID")
     private TeamSync team;
 
 //    @ManyToMany //다대다 : 실무에서 쓰이지않는다
