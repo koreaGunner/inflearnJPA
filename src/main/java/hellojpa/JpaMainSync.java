@@ -217,41 +217,60 @@ public class JpaMainSync {
 
 
 
-            TeamSync team = new TeamSync();
-            team.setName("teamA");
-            em.persist(team);
+//            TeamSync team = new TeamSync();
+//            team.setName("teamA");
+//            em.persist(team);
+//
+//            TeamSync team2 = new TeamSync();
+//            team2.setName("teamB");
+//            em.persist(team2);
+//
+//            MemberSync member = new MemberSync();
+//            member.setUsername("member1");
+//            member.setTeam(team);
+//            em.persist(member);
+//
+//            MemberSync member2 = new MemberSync();
+//            member2.setUsername("member2");
+//            member2.setTeam(team2);
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
+//
+////            MemberSync m = em.find(MemberSync.class, member.getId());
+//            //멤버만 조회
+////            List<MemberSync> members = em.createQuery("select m from MemberSync m", MemberSync.class)
+////                    .getResultList(); //SQL : select * from MemberSync
+//                                      //SQL : select * from Team where TEAM_ID = xxx (즉시로딩일 때는 이 쿼리가 무조건 나감)
+//                                      // -> 결과적으로 N + 1 문제를 일으킨다
+//
+//            //패치조인
+//            List<MemberSync> members = em.createQuery("select m from MemberSync m join fetch m.team", MemberSync.class)
+//                    .getResultList();
+//
+//            for (MemberSync memberSync : members) {
+//                System.out.println("memberSync.getTeam().getName() = " + memberSync.getTeam().getName());
+//            }
 
-            TeamSync team2 = new TeamSync();
-            team2.setName("teamB");
-            em.persist(team2);
 
-            MemberSync member = new MemberSync();
-            member.setUsername("member1");
-            member.setTeam(team);
-            em.persist(member);
 
-            MemberSync member2 = new MemberSync();
-            member2.setUsername("member2");
-            member2.setTeam(team2);
-            em.persist(member2);
+
+            Child child1 = new Child();
+            Child child2 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent); //cascade
 
             em.flush();
             em.clear();
 
-//            MemberSync m = em.find(MemberSync.class, member.getId());
-            //멤버만 조회
-//            List<MemberSync> members = em.createQuery("select m from MemberSync m", MemberSync.class)
-//                    .getResultList(); //SQL : select * from MemberSync
-                                      //SQL : select * from Team where TEAM_ID = xxx (즉시로딩일 때는 이 쿼리가 무조건 나감)
-                                      // -> 결과적으로 N + 1 문제를 일으킨다
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0); //자식 엔티티를 컬렉션에서 제거
 
-            //패치조인
-            List<MemberSync> members = em.createQuery("select m from MemberSync m join fetch m.team", MemberSync.class)
-                    .getResultList();
-
-            for (MemberSync memberSync : members) {
-                System.out.println("memberSync.getTeam().getName() = " + memberSync.getTeam().getName());
-            }
 
             tx.commit();
         } catch (Exception e) {
