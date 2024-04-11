@@ -19,12 +19,31 @@ public class JpaMainEMB {
         tx.begin();
 
         try {
-            MemberEMB member = new MemberEMB();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("city", "street", "zipcode"));
-            member.setWorkPeriod(new Period());
 
+            Address addres = new Address("city", "street", "zipcode");
+
+            MemberEMB member = new MemberEMB();
+            member.setUsername("member1");
+            member.setHomeAddress(addres);
             em.persist(member);
+
+
+//            Address copyAddress = new Address(addres.getCity(), addres.getStreet(), addres.getZipcode());
+//
+//            MemberEMB member2 = new MemberEMB();
+//            member2.setUsername("member2");
+//            member2.setHomeAddress(copyAddress);
+//            em.persist(member2);
+
+            //side effect발생 -> 객체의 같음은 주소값을 공유하기때문에 부분만 수정할 수 없다.
+            //그러므로 setter 자체를 없애서 side effect를 없애야한다(private으로 만들어도 됨)
+//            member.getHomeAddress().setCity("newCity");
+
+            //setter를 없앴으므로 값을 바꾸려면 새로운 객체를 만들어서 통으로 갈아끼우는게 방법
+            Address newAddress = new Address("newAddress", addres.getStreet(), addres.getZipcode());
+            member.setHomeAddress(newAddress);
+
+            
 
             tx.commit();
         } catch (Exception e) {
