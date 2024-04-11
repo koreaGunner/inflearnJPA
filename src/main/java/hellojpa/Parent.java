@@ -14,7 +14,7 @@ public class Parent {
 
     private String name;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)// orphanRemoval = true : 부모객체를 지우면 자식객체도 같이 지움
     private List<Child> childList = new ArrayList<>();
 
     public void addChild(Child child) {
